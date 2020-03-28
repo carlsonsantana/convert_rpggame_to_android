@@ -3,6 +3,7 @@ set -e
 # Standalone game variables
 GAME_FOLDER=$(pwd)/your_game
 GAME_APK_NAME=com.your.game
+GAME_NAME='Your game'
 ##############################
 
 EASYRPG_PLAYER_FOLDER=$(pwd)/buildscripts/android/Player
@@ -39,13 +40,16 @@ if [ ! -f 'jni/gamebrowser/'$GAME_APK_NATIVE'_game_browser_GameScanner.cpp' ]; t
 fi
 
 # Change APK name
-find . -type f -name "*.java" -exec sed -i 's|org\.easyrpg\.player|'$GAME_APK_NAME'|g' {} \;
-find . -type f -name "*.xml" -exec sed -i 's|org\.easyrpg\.player|'$GAME_APK_NAME'|g' {} \;
-sed -i 's|org\.easyrpg\.player|'$GAME_APK_NAME'|g' $ANDROID_FOLDER/app/build.gradle
-sed -i 's|org\.easyrpg\.player|'$GAME_APK_NAME'|g' $ANDROID_FOLDER/fastlane/Appfile
-sed -i 's|org\.easyrpg\.player|'$GAME_APK_NAME'|g' AndroidManifest.xml
+find . -type f -name "*.java" -exec sed -i "s|org\.easyrpg\.player|$GAME_APK_NAME|g" {} \;
+find . -type f -name "*.xml" -exec sed -i "s|org\.easyrpg\.player|$GAME_APK_NAME|g" {} \;
+sed -i "s|org\.easyrpg\.player|$GAME_APK_NAME|g" $ANDROID_FOLDER/app/build.gradle
+sed -i "s|org\.easyrpg\.player|$GAME_APK_NAME|g" $ANDROID_FOLDER/fastlane/Appfile
+sed -i "s|org\.easyrpg\.player|$GAME_APK_NAME|g" AndroidManifest.xml
 
 # Change jni references
-find . -type f -name "*.cpp" -exec sed -i 's|org_easyrpg_player|'$GAME_APK_NATIVE'|g' {} \;
-find . -type f -name "*.h" -exec sed -i 's|org_easyrpg_player|'$GAME_APK_NATIVE'|g' {} \;
-find . -type f -name "*.mk" -exec sed -i 's|org_easyrpg_player|'$GAME_APK_NATIVE'|g' {} \;
+find . -type f -name "*.cpp" -exec sed -i "s|org_easyrpg_player|$GAME_APK_NATIVE|g" {} \;
+find . -type f -name "*.h" -exec sed -i "s|org_easyrpg_player|$GAME_APK_NATIVE|g" {} \;
+find . -type f -name "*.mk" -exec sed -i "s|org_easyrpg_player|$GAME_APK_NATIVE|g" {} \;
+
+# Change game name
+sed -i "s/EasyRPG Player/$GAME_NAME/g" res/values/strings.xml
