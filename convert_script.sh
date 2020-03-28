@@ -5,6 +5,7 @@ GAME_FOLDER=$(pwd)/your_game
 GAME_APK_NAME=com.your.game
 GAME_NAME='Your game'
 GAME_BUG_REPORT_EMAIL=email_of_game@mail.com
+GAME_SITE='http://example.com/'
 GAME_VERSION_CODE=100
 GAME_VERSION_NAME=1.0.0
 GAME_METADATA=$(pwd)/metadata
@@ -63,6 +64,9 @@ sed -i "s|EasyRPG Player|$GAME_NAME|g" res/values/strings.xml
 
 # Change game email
 sed -i "s|easyrpg@easyrpg\.org|$GAME_BUG_REPORT_EMAIL|g" java/$GAME_APK_FOLDER_NAME/player/EasyRpgPlayerActivity.java
+
+# Change game site
+sed -i "s|https://easyrpg\.org/|$GAME_SITE|g" res/layout/browser_nav_header.xml
 
 # Change version code
 sed -i 's/android\:versionCode="[0-9]\+"/android:versionCode="'$GAME_VERSION_CODE'"/g' AndroidManifest.xml

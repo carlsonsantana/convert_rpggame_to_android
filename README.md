@@ -32,22 +32,26 @@ keytool -genkey -v -keystore game_certificate.key -alias nightly -keyalg RSA -ke
 4. Change the variables of `convert_script.sh`;
 5. Fork the [EasyRPG Player](https://github.com/EasyRPG/Player) repository (see [Advice](#code-of-conduct));
 6. After script `0_build_everything.sh` is ended sucessful, change the variable of `5_build_android_port.sh` to set your keystore path (made in step 3) and password;
-7. Run the script `convert_script.sh`;
-```sh
-./convert_script.sh
-```
-8. Run the script `5_build_android_port.sh`;
-```sh
-cd buildscripts/android
-./5_build_android_port.sh
-```
-9. Change the remote origin of Player repository and set your forked repo as origin, commit and push it;
+7. Change the remote origin of Player repository and set your forked repo as origin;
 ```sh
 cd buildscripts/android/Player
 git remote remove origin
 git remote add origin https://github.com/myaccount/Player
+```
+8. Run the script `convert_script.sh`;
+```sh
+./convert_script.sh
+```
+9. Run the script `5_build_android_port.sh`;
+```sh
+cd buildscripts/android
+./5_build_android_port.sh
+```
+10. Commit and push it;
+```sh
+cd buildscripts/android/Player
 git add .
 git commit -m "Commit message"
 git push -u origin master
 ```
-10. Publish your game on Google Play.
+11. Publish your game on Google Play.
