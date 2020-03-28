@@ -7,6 +7,7 @@ GAME_NAME='Your game'
 GAME_BUG_REPORT_EMAIL=email_of_game@mail.com
 GAME_VERSION_CODE=100
 GAME_VERSION_NAME=1.0.0
+GAME_METADATA=$(pwd)/metadata
 ##############################
 
 EASYRPG_PLAYER_FOLDER=$(pwd)/buildscripts/android/Player
@@ -65,3 +66,7 @@ sed -i 's/android\:versionCode="[0-9]\+"/android:versionCode="'$GAME_VERSION_COD
 
 # Change version name
 sed -i 's/android\:versionName="[0-9A-Za-z\-\.]\+"/android:versionName="'$GAME_VERSION_NAME'"/g' AndroidManifest.xml
+
+# Change metadata
+rm -r $ANDROID_FOLDER/metadata
+cp -r $GAME_METADATA $ANDROID_FOLDER/metadata
