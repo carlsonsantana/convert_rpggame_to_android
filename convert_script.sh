@@ -8,6 +8,8 @@ GAME_BUG_REPORT_EMAIL=email_of_game@mail.com
 GAME_VERSION_CODE=100
 GAME_VERSION_NAME=1.0.0
 GAME_METADATA=$(pwd)/metadata
+GAME_ICON_PATH=$GAME_METADATA/en-US/images/icon.png
+GAME_ICON_PROMOGRAPHIC=$GAME_METADATA/en-US/images/promoGraphic.png
 ##############################
 
 EASYRPG_PLAYER_FOLDER=$(pwd)/buildscripts/android/Player
@@ -17,6 +19,7 @@ GAME_APK_NATIVE=$(echo "$GAME_APK_NAME" | sed 's/\./_/g')
 
 cd $EASYRPG_PLAYER_FOLDER
 
+# Ignore game folder on commit
 sed -i ':a;N;$!ba;s|\n\n# Game folder||g' .gitignore
 sed -i ':a;N;$!ba;s|\n/builds/android/app/src/main/assets/||g' .gitignore
 echo "" >> .gitignore
@@ -66,6 +69,25 @@ sed -i 's/android\:versionCode="[0-9]\+"/android:versionCode="'$GAME_VERSION_COD
 
 # Change version name
 sed -i 's/android\:versionName="[0-9A-Za-z\-\.]\+"/android:versionName="'$GAME_VERSION_NAME'"/g' AndroidManifest.xml
+
+# Convert icon to HDPI: 72x72
+convert $GAME_ICON_PATH -resize 72x72 res/drawable-hdpi/ic_launcher.png
+
+# Convert icon to MDPI: 48x48
+convert $GAME_ICON_PATH -resize 48x48 res/drawable-mdpi/ic_launcher.png
+
+# Convert icon to XHDPI: 96x96
+convert $GAME_ICON_PATH -resize 96x96 res/drawable-xhdpi/ic_launcher.png
+
+# Convert icon to XXHPDI: 144x144
+convert $GAME_ICON_PATH -resize 144x144 res/drawable-xxhdpi/ic_launcher.png
+
+# Convert icon to XXXHDPI: 192x192
+convert $GAME_ICON_PATH -resize 192x192 res/drawable-xxxhdpi/ic_launcher.png
+
+# Convert icon to promoGraphic.png: 180x120
+convert $GAME_ICON_PATH -resize 120x120 $GAME_ICON_PROMOGRAPHIC
+convert $GAME_ICON_PROMOGRAPHIC -resize 180x120 -size 180x120 xc:none +swap -gravity center -composite $GAME_ICON_PROMOGRAPHIC
 
 # Change metadata
 rm -r $ANDROID_FOLDER/metadata

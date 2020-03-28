@@ -11,7 +11,8 @@ Because [EasyRPG is under GPL3 license](https://github.com/EasyRPG/Player/blob/m
 * git;
 * java;
 * wget;
-* gradle.
+* gradle;
+* imagemagick.
 
 ## Build game app
 
