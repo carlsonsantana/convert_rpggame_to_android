@@ -4,6 +4,7 @@ set -e
 GAME_FOLDER=$(pwd)/your_game
 GAME_APK_NAME=com.your.game
 GAME_NAME='Your game'
+GAME_BUG_REPORT_EMAIL=email_of_game@mail.com
 ##############################
 
 EASYRPG_PLAYER_FOLDER=$(pwd)/buildscripts/android/Player
@@ -52,4 +53,7 @@ find . -type f -name "*.h" -exec sed -i "s|org_easyrpg_player|$GAME_APK_NATIVE|g
 find . -type f -name "*.mk" -exec sed -i "s|org_easyrpg_player|$GAME_APK_NATIVE|g" {} \;
 
 # Change game name
-sed -i "s/EasyRPG Player/$GAME_NAME/g" res/values/strings.xml
+sed -i "s|EasyRPG Player|$GAME_NAME|g" res/values/strings.xml
+
+# Change game email
+sed -i "s|easyrpg@easyrpg\.org|$GAME_BUG_REPORT_EMAIL|g" java/$GAME_APK_FOLDER_NAME/player/EasyRpgPlayerActivity.java
