@@ -12,7 +12,9 @@ Because [EasyRPG is under GPL3 license](https://github.com/EasyRPG/Player/blob/m
 * java;
 * wget;
 * gradle;
-* imagemagick.
+* imagemagick;
+* libncurses5;
+* gtk-doc.
 
 ## Build game app
 
