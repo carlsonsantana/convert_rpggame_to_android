@@ -1,0 +1,3 @@
+Sample full description of your game.
+
+With multi lines.
