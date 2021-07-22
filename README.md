@@ -12,9 +12,7 @@ Because [EasyRPG is under GPL3 license](https://github.com/EasyRPG/Player/blob/m
 * java;
 * wget;
 * gradle;
-* imagemagick;
-* libncurses5;
-* gtk-doc.
+* imagemagick.
 
 ## Build game app
 
@@ -27,13 +25,16 @@ git clone https://github.com/EasyRPG/buildscripts.git
 cd buildscripts/android
 ./0_build_everything.sh
 ```
-3. While the script `0_build_everything.sh` is running, create a keystore with `nightly` alias (**not lose or share the `game_certificate.key` file**);
+3. While the script `0_build_everything.sh` is running, create a keystore (**do not lose or share the `game_certificate.key` file**);
 ```sh
-keytool -genkey -v -keystore game_certificate.key -alias nightly -keyalg RSA -keysize 4096 -validity 10000
+keytool -genkey -v -keystore game_certificate.key -alias game_cert -keyalg RSA -keysize 4096 -validity 10000
 ```
 4. Change the variables of `convert_script.sh`;
-5. Fork the [EasyRPG Player](https://github.com/EasyRPG/Player) repository (see [Advice](#code-of-conduct));
-6. After script `0_build_everything.sh` is ended sucessful, change the variable of `5_build_android_port.sh` to set your keystore path (made in step 3) and password;
+5. Fork the [EasyRPG Player](https://github.com/EasyRPG/Player) repository (see [Advice](#advice));
+6. After script `0_build_everything.sh` ended successfully, edit the variables in `5_build_android_port.sh` to set your keystore path (made in step 3) and password;
+- Set ``KEYSTORE_PATH`` to ``$(pwd)/game_certificate.key``
+- Set ``KEYSTORE_PASSWORD`` to the password you entered when creating the key
+- Set ``KEYSTORE_NAME`` to ``game_cert`` (the alias)
 7. Change the remote origin of Player repository and set your forked repo as origin;
 ```sh
 cd buildscripts/android/Player
