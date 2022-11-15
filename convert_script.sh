@@ -27,11 +27,15 @@ echo "" >> .gitignore
 echo "# Game folder" >> .gitignore
 echo "/builds/android/app/src/main/assets/" >> .gitignore
 
-cd builds/android/app/src/main
+BUILD_FOLDER=$ANDROID_FOLDER/app/src/main
 
 # Copy game
-rm -fr assets/game
-cp -r $GAME_FOLDER assets/game
+cd $GAME_FOLDER
+rm -f $BUILD_FOLDER/game.zip
+rm -f $BUILD_FOLDER/assets/game.zip
+zip -r $BUILD_FOLDER/game.zip *
+mv $BUILD_FOLDER/game.zip $BUILD_FOLDER/assets/game.zip
+cd $BUILD_FOLDER
 
 # Change APK name
 sed -i "s|org\.easyrpg\.player|$GAME_APK_NAME|g" $ANDROID_FOLDER/app/build.gradle
